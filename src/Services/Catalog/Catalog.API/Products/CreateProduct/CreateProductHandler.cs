@@ -7,9 +7,9 @@ public record CreateProductCommand(string Name, List<string> Category, string De
 
 public record CreateProductResult(Guid Id);
 
-public class CreateProductCommandValidatoer : AbstractValidator<CreateProductCommand>
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
-    public CreateProductCommandValidatoer()
+    public CreateProductCommandValidator()
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
         RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");

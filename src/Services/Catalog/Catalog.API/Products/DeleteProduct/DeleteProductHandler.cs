@@ -1,10 +1,19 @@
 ﻿using Catalog.API.Products.GetProducts;
+using FluentValidation;
 
 namespace Catalog.API.Products.DeleteProduct;
 
-public record DeleteProductCommand(Guid id) : ICommand<DeleteProductResult>;
+public record DeleteProductCommand(Guid Id) : ICommand<DeleteProductResult>;
 
 public record DeleteProductResult(bool IsSuccess);
+
+public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
+{
+    public DeleteProductCommandValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
+    }
+}
 
 internal class DeleteProductCommandHandler(IDocumentSession session, ILogger<GetProductsQueryHandler> logger) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
 {
@@ -12,7 +21,7 @@ internal class DeleteProductCommandHandler(IDocumentSession session, ILogger<Get
     {
         logger.LogInformation("DeleteProductCommandHandler.Handle called with {@Command}", command);
 
-        session.Delete<Product>(command.id);
+        session.Delete<Product>(command.Id);
         await session.SaveChangesAsync(cancellationToken);
 
         return new DeleteProductResult(true);

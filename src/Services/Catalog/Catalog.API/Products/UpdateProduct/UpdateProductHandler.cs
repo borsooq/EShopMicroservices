@@ -1,11 +1,21 @@
-﻿
-using Catalog.API.Products.GetProducts;
+﻿using Catalog.API.Products.GetProducts;
+using FluentValidation;
 
 namespace Catalog.API.Products.UpdateProduct;
 
 public record UpdateProductCommand(Guid Id, string Name, List<string> Category, string Description, string ImageFile, decimal Price) : ICommand<UpdateProductResult>;
 
 public record UpdateProductResult(bool IsSuccess);
+
+public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+{
+    public UpdateProductCommandValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
+        RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required").Length(2,150).WithMessage("Name must be between 2 and 150");
+        RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
+    }
+}
 
 internal class UpdateProductCommandHandler(IDocumentSession session, ILogger<GetProductsQueryHandler> logger) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
