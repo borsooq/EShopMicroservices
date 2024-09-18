@@ -8,3 +8,4 @@ global using Catalog.API.Exceptions;
 global using Microsoft.AspNetCore.Diagnostics;
 global using Microsoft.AspNetCore.Mvc;
 global using Catalog.API.Data;
+global using Marten.Pagination;
