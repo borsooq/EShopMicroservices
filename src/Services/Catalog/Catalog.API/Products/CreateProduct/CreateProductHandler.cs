@@ -1,5 +1,4 @@
-﻿using Catalog.API.Products.GetProducts;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Catalog.API.Products.CreateProduct;
 
