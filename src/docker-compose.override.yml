@@ -41,7 +41,7 @@ services:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
   
   distributedcache:
-    container_name: distibutedcache
+    container_name: distributedcache
     restart: always
     ports:
       - "6379:6379"
@@ -55,7 +55,7 @@ services:
       - ConnectionStrings__Redis=distributedcache:6379"
     depends_on:
       - basketdb
-      - distibutedcache
+      - distributedcache
     ports:
       - "6001:8080"
       - "6061:8081"
