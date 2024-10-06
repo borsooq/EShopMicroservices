@@ -1,6 +1,6 @@
 ﻿namespace Ordering.Domain.Models;
 
-public class OrderAggregate : Aggregate<OrderId>
+public class Order : Aggregate<OrderId>
 {
     private readonly List<OrderItem> _orderItems = new();
 
@@ -19,9 +19,9 @@ public class OrderAggregate : Aggregate<OrderId>
         private set { }
     }
 
-    public static OrderAggregate Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
+    public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
     {
-        var order = new OrderAggregate
+        var order = new Order
         {
             Id = id,
             CustomerId = customerId,

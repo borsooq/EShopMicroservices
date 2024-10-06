@@ -6,9 +6,9 @@ using Ordering.Domain.ValueObjects;
 
 namespace Ordering.Infrastructure.Data.Configurations;
 
-public class OrderAggregateConfiguraton : IEntityTypeConfiguration<OrderAggregate>
+public class OrderAggregateConfiguraton : IEntityTypeConfiguration<Order>
 {
-    public void Configure(EntityTypeBuilder<OrderAggregate> builder)
+    public void Configure(EntityTypeBuilder<Order> builder)
     {
         builder.HasKey(o => o.Id);
 
@@ -27,7 +27,7 @@ public class OrderAggregateConfiguraton : IEntityTypeConfiguration<OrderAggregat
 
         builder.ComplexProperty(o => o.OrderName, nameBuilder => {
             nameBuilder.Property(n => n.Value)
-                .HasColumnName(nameof(OrderAggregate.OrderName))
+                .HasColumnName(nameof(Order.OrderName))
                 .HasMaxLength(100)
                 .IsRequired();
                 });
